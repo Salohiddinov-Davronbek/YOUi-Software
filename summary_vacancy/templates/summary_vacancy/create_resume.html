@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Home page </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% load static %}
+  <script src="https://kit.fontawesome.com/47105634f8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/js/bootstrap.min.js' %}">
+  <link href="{% static 'assets/css/theme/collapse/theme_style.css' %}" rel="stylesheet" id="rt_style_components" type="text/css" />
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="{% static 'assets/js/jquery.js' %}"></script>
+</head>
+
+<body style="background: rgba(0,0,0,0.9);">
+  <div class="container-fluid">
+    <div class="row" style="width: 98%; margin: auto; height: 150px; padding-left: 0px; padding-right: 0px;">
+      <div class="col-sm" style=" padding: 10px;">
+        <nav class="navbar navbar-expand-lg navbar-light " style="margin-top: 30px;">
+
+          <a class="navbar-brand" href="{% url 'summary_vacancy:s_profile' %}">
+            <img src="{% static 'bootstrap/images/logo_white.jpg' %}" style="border-radius: 50%; width: 50px;">
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+
+                {% if request.user.is_authenticated %} {% for summaries in a %}
+                <a class="nav-link" href="{% url 'meine_biografies' %}" style="color: white;">Мои резюме <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="#" style="color: white;">Помощь <span class="sr-only">(current)</span></a>
+              </li>
+            </ul>
+            <a href="#">
+              <h4 style="margin-right: 30px;">
+         <i class="far fa-star" style="font-size: 20px; color: white; font-size: 30px;"></i>
+                                            </h4>
+            </a>
+            <a href="#">
+              <h4 style="margin-right: 30px;">
+                 <i class="far fa-bell" style="font-size: 20px; color: white; font-size: 30px;"></i>
+                 </h4>
+            </a>
+            <!-- ****** -->
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+              <i class="far fa-user-circle" style="font-size: 20px; color: white; font-size: 30px;"></i>
+            </a>
+
+            <ul class="dropdown-menu  dropdown-menu-default">
+              <li>
+                <a href="{% url 'user_profile' %}">
+                  <i class="fas fa-user-circle"></i> {{summaries.user.last_name}} {{summaries.user.first_name}} </a>
+              </li>
+              <li>
+                <a href="{% url 's_details' %}">
+                  <i class="fas fa-cog"></i> Настройка
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'book_editt' user.id %}">
+                  <i class="fas fa-image"></i></i> изображения
+                </a>
+              </li>
+              <li class="divider"> </li>
+              <li>
+                <a href="{% url 'logout' %}">
+                  <i class="fas fa-sign-out-alt"></i> Выход </a>
+              </li>
+            </ul>
+
+            {% endfor %} {% endif %}
+        </nav>
+        </div>
+      </div>
+    </div>
+    <!-- ***************** -->
+    <!-- /11111111111111111111111111 -->
+    <div class="container-fluid" style=" background: white; background: rgb(245, 241, 240); height: 120px;">
+      <div class="row">
+        <div class="col-sm" style=" margin-top: 40px;">
+          <div style="width: 85%; margin: auto;">
+
+            <button type="button" class="btn btn-primary">Как заполнить правила для создать резюме</button>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /11111111111111111111111111 -->
+    <div class="container-fluid" style="background: white; height: auto;">
+      <div class="row" style="height: auto;">
+        <div class="col-sm" style="">
+          <div class="row">
+            <div class="col-sm">
+              <h3 style="margin: auto; width: 85%; margin-top: 30px;">Cоздать резюме через заполнить полью  <hr>
+                                    </h3>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-md-10" style="margin: auto;">
+
+                      <!-- ****************** -->
+              <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+              
+
+                <div class="form-group row">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">Имя</label>
+                  <div class="col-sm-6">
+                    {{form.first_name}}
+                    {{form.rezyumi}}
+                  </div>
+                </div>
+                <div class="form-group row" style="margin-top: 20px;">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">Фамилия</label>
+                  <div class="col-sm-6">
+                    {{form.last_name}}
+                  </div>
+                </div>
+                <div class="form-group row" style="margin-top: 40px;">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">Мобильный телефон</label>
+                  <div class="col-sm-4">
+                    {{form.phone_numer}}
+                  </div>
+                </div>
+                <div class="form-group row" style="margin-top: 40px;">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">Город проживания</label>
+                  <div class="col-sm-6">
+                    {{form.city_of_residence}}
+                  </div>
+                </div>
+                <!-- ****************************** -->
+                <div class="form-group row" style="margin-top: 40px;">
+                  <label for="inputEmail3" class="col-sm-3 col-form-label">
+                    <h4 style="font-weight: bold;">Основная информация</h4></label>
+                </div>
+                <div class="form-group row" style="margin-top: 30px;">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">Дата рождения</label>
+                  <div class="col-sm-3">
+                    {{form.date_of_birth}}
+                  </div>
+                </div>
+                <div class="form-group row" style="margin-top: 30px;">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">Пол</label>
+                  <div class="col-sm-3">
+                    {% for radio in form.sex %}
+                    <div class="custom-control custom-radio">
+                      {{ radio.tag }}
+                      <label class="" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                
+
+
+
+                <div class="form-group row" style="margin-top: 40px;">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">Гражданство</label>
+                  <div class="col-sm-6">
+                    <a id="grajdan" style="color: rgb(40, 101, 176);">Указать гражданство</a>
+                   
+                    
+                  </div>
+                </div>
+
+               
+                <div id="Grajdanmodal" class="modalll">
+                  <div class="modal-content">
+                  <span class="closeee">&times;</span>
+                  <p>
+                     <div class="overflow-auto" style="height: 400px;">
+                     <ul style="list-style-type: none;">
+                     
+                      <li>{{form.Abxaziya}}  Абхазия</li>
+                      <li>{{form.Avstraliya}} Австралия</li>
+                      <li>{{form.Avstriya}} Австрия</li>
+                      <li>{{form.Ozarbayjon}} Азербайджан</li>
+                      <li>{{form.Albaniya}} Албания</li>
+                      <li>{{form.Jazoir}} Алжир</li>
+                      <li>{{form.Angola}} Ангола</li>
+                      <li>{{form.Andorra}} Андорра</li>
+                      <li>{{form.Argentina}} Аргентина</li>
+                      <li>{{form.Armaniston}} Армения</li>
+                      <li>{{form.Afgoniston}} Афганистан</li>
+                      <li>{{form.Bagama_orollari}} Багамские Острова</li>
+                      <li>{{form.Bangladesh}} Бангладеш</li>
+                      <li>{{form.Barbados}} Барбадос</li>
+                      <li>{{form.Bahrayn}} Бахрейн</li>
+                      <li>{{form.Belorussiya}} Беларусь</li>
+                      <li>{{form.Beliz}} Белиз</li>
+                      <li>{{form.Belgiya}} Бельгия</li>
+                      <li>{{form.Bolgariya}} Болгария</li>
+                      <li>{{form.Boliviya}} Боливия</li>
+                      <li>{{form.Bosniya_Gertsegovina}} Босния и Герцеговина</li>
+
+                      <li>{{form.Braziliya}} Бразилия</li>
+                      <li>{{form.Bruney_Darussalom}} Бруней Даруссалам </li>
+                      <li>{{form.Burkina_Faso}} Буркина Фасо</li>
+                      <li>{{form.Buyuk_Britaniya}} Великобритания</li>
+                      <li>{{form.Vengriya}} Венесуэла</li>
+                      <li>{{form.Vetnam}} Вьетнам</li>                 
+                      <li>{{form.Gabon}} Габон</li>                 
+                      <li>{{form.Gvineya}} Гвинея</li>                 
+                      <li>{{form.Germaniya}} Германия</li>                 
+                      <li>{{form.Rossiya}} Россия</li>                 
+                      <li> {{form.AQSH}} США</li>                 
+                      <li>{{form.Ozbekiston}} Узбекистан</li>                 
+                      <li>{{form.Yaponiya}} Япония</li>
+                      </div>        
+                    
+              </ul>
+                  </p>
+                  </div>
+                  </div>
+
+
+
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+.modalll {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+/* The Close Button */
+.closeee {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.closeee:hover,
+.closeee:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+
+<script>
+var modalll = document.getElementById("Grajdanmodal");
+var btn = document.getElementById("grajdan");
+var spannn = document.getElementsByClassName("closeee")[0];
+btn.onclick = function() {
+  modalll.style.display = "block";
+}
+spannn.onclick = function() {
+  modalll.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modalll) {
+    modalll.style.display = "none";
+  }
+}
+</script>
+
+
+
+
+<!-- /****************************************************** -->
+
+
+                                <div class="form-group row" style="margin-top: 40px;">
+                                <label for="inputEmail3" class="col-sm-3 col-form-label">
+                                  <h4 style="font-weight: bold;">Образование</h4></label>
+                              </div>
+
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Информация об образование
+                              </a> 
+
+
+                          <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+
+                             
+                              <div class="form-group row" style="margin-top: 30px;">
+                                <label for="inputPassword3" class="col-sm-3 col-form-label">Уровень настоящее время</label>
+                                <div class="col-sm-6">
+                                  {{form.dgree}}
+                                </div>
+                              </div> 
+
+
+                            
+
+
+
+                              <!-- table -->
+                              <table class="table table-sm" style="margin-top: 40px;">
+                                <thead class="text-center">
+                                  <tr>
+                                    <th>Учебное заведение</th>
+                                    <th>Факультет</th>
+                                    <th>Специализация</th>
+                                    <th>Год окончания</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {% for form_data in formset %}
+                                  <tr class="item">
+                                    <td>
+                                      {{ form_data.class_name }}
+                                    </td>
+                                    <td>
+                                      {{ form_data.english }}
+                                    </td>
+                                    <td>
+                                      {{ form_data.nepali }}
+
+                                    </td>
+                                    <td>
+                                      {{ form_data.nepalii }}
+
+                                    </td>
+                                    <td>
+                                      <button type="button" class="btn btn-danger btn-sm remove-form-row" id="{{ formset.prefix }}">
+
+                                        удалить
+                                      </button>
+                                    </td>
+                                  </tr>
+                                  {% endfor %}
+                                  <tr>
+                                    <td colspan="9" style="border-left: none!important; border-right: none !important; border-bottom: none!important;">
+                                      <button type="button" class="btn btn-sm btn-success add-form-row" id="{{ formset.prefix }}">
+                                        добавить таблицы
+                                      </button>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              {{ formset.management_form }}
+                              <!-- /table -->
+                                </div>
+                                </div>
+
+
+
+<!-- *///////////////////////////////////// -->
+
+
+<!-- //********************************************** -->
+
+
+ <div class="form-group row" style="margin-top: 40px;">
+                                <label for="inputEmail3" class="col-sm-3 col-form-label">
+                                  <h4 style="font-weight: bold;">Владение языками</h4></label>
+                              </div>
+
+
+ <a class="btn btn-primary" data-toggle="collapse" href="#vladennieyazika" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Информация о знать язык
+  </a>
+
+  <div class="collapse" id="vladennieyazika">
+  <div class="card card-body">
+  
+                              <div class="form-group row" style="margin-top: 30px;">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">родной язык</label>
+                                <div class="col-sm-6">
+                                  {{form.language}}
+                                </div>
+                              </div>
+                              <div class="form-group row" style="margin-top: 30px;">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">иностранный язык</label>
+                                <div class="col-sm-6">
+                                 <ul >
+                                   <li>{{form.English}} английский</li>
+                                   <li>{{form.French}} французский</li>
+                                   <li>{{form.German}} немецкий</li>
+                                   <li>{{form.Ukrainian}} украинский</li>
+                                   <li>{{form.Italian}} итальянский</li>
+                                   <li>{{form.Uzbek}} узбекский</li>
+                                 </ul>
+   
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+<!-- /*/*/*/*/*/*/*/*/*/*///////////////////////////////////// -->
+
+                <style type="text/css">
+                  .opt li {
+                    display: inline-block;
+                  }
+                </style>
+                <div class="form-group row" style="margin-top: 40px;">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">Опыт работы</label>
+                  <div class="col-sm-6">
+                    <ul class="opt">
+                      <li>
+                        <p id="optbor" class="collapsed" data-toggle="collapse" href="#collapseOne"></p>
+                      </li>
+                      <li>Есть опыт работы</li>
+                    </ul>
+                    <ul class="opt">
+                      <li>
+                        <p id="optyuqq" class="collapsed" data-toggle="collapse" href="#collapseOne"></p>
+                      </li>
+                      <li>Нет опыта работы</li>
+                    </ul>
+                  </div>
+                </div>
+                <script type="text/javascript">
+                  var data = new Array();
+                  var i = 0;
+                </script>
+                <script type="text/javascript">
+                  var dataa = new Array();
+                  var a = 0;
+                </script>
+                <div class="form-group row">
+                  <!--   <div class="col-sm-2">work</div> -->
+                  <div class="col-sm-10">
+
+                    {% for radio in form.work %}
+                    <div class="custom-control custom-radio">
+                      <!-- {{ radio.tag }} -->
+                      <!-- <label class="rggg" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label> -->
+                    </div>
+
+                    <script type="text/javascript">
+                      dataa[i] = ('{{ radio.tag }}');
+                      i++;
+                    </script>
+
+                    <script type="text/javascript">
+                      data[i] = ('{{ radio.id_for_label }}');
+                      i++;
+                    </script>
+                    {% endfor %}
+                  </div>
+                </div>
+                <!-- <p id="optyuq"></p> -->
+                <script type="text/javascript">
+                  var kurs = Array();
+                  var kursNo = 1;
+                  for (var i = 0; i < dataa.length; i++) {
+                    console.log(dataa[i]);
+                    kurs[kurs.length] = dataa[i];
+                    document.getElementById("optbor").innerHTML = kurs[0];
+                    // document.getElementById("optyuq").innerHTML = kurs[1];
+                    document.getElementById("optyuqq").innerHTML = kurs[2];
+                  }
+                </script>
+
+                <!-- <p id="bir" >aaaaaaa</p>
+             <p id="ikki">abbbaabbbabb</p>
+             <p id="uch">abbbaabbbabb</p>
+             <p id="tort" >bbbbbb</p>
+             <script type="text/javascript">
+             var kurs = Array();
+             var kursNo = 1;
+             for (var i = 0; i < data.length; i++) {
+             console.log(data[i]);
+             kurs[kurs.length] = data[i];
+             document.getElementById("bir").innerHTML = kurs[0];
+             document.getElementById("ikki").innerHTML = kurs[1];
+             document.getElementById("uch").innerHTML = kurs[2];
+             document.getElementById("tort").innerHTML = kurs[3];
+             }
+                                        </script>  -->
+                <div class="accordion-custom">
+                  <div id="accordion">
+                    <div>
+                      <div class="row">
+                        <div class="col-md-12">
+
+                          <!-- OPIT BOR ISHCHILAR UCHUN FORMA  -->
+                          <div id="collapseOne" class="collapse" data-parent="#accordion">
+                            <div class="col-sm-12" style="box-shadow: none;">
+                              <!-- ****** -->
+                              <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-3 col-form-label">
+                                  <h4 style="font-weight: bold;">Специальность</h4></label>
+                              </div>
+                              <div class="form-group row" style="margin-top: 30px;">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Желаемая должность</label>
+                                <div class="col-sm-6">
+                                  {{form.career_objective}}
+                                </div>
+                              </div>
+
+                              <div class="form-group row" style="margin-top: 30px;">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Зарплата</label>
+                                <div class="col-sm-4">
+                                  {{form.salary}}
+                                </div>
+                                <div class="col-sm-2">
+                                  {{form.salaryy}}
+                                </div>
+                              </div>
+                              <div class="form-group row" style="margin-top: 30px;">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Специализации</label>
+                                <div class="col-sm-6">
+                                  <label for="inputPassword3" class="col-sm-6 col-form-label"><a id="myBtn" style="color: rgba(88, 155, 214);"> Указать специализации </a></label>
+                                </div>
+                              </div>
+                              <div id="myModal" class="modal">
+                                <span class="close">&times;</span>
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                  <div class="overflow-auto" style="height: 500px;">
+                                    <p> {{form.Car}} Автомобильный бизнес</p>
+                                    <p> {{form.Administrative}} Административный персонал</p>
+                                    <p> {{form.Accounting_department}} Бухгалтерия</p>
+
+                                    <p> {{form.Mining}} Добыча сырья</p>
+                                    <p> {{form.Other}} Другое</p>
+                                    <p> {{form.Procurement}} Закупки</p>
+
+                                    <p> {{form.Information}} Информационные технологии, Интернет, Мультимедиа</p>
+                                    <p> {{form.Art}} Искусство, Развлечения, Масс-медиа</p>
+                                    <p> {{form.Consulting}} Консультирование</p>
+
+                                    <p> {{form.Marketing}} Маркетинг, Реклама, PR</p>
+                                    <p> {{form.The_medicine}} Медицина, Фармацевтика</p>
+                                    <p> {{form.The_science}} Наука, Образование</p>
+
+                                    <p> {{form.Sales}} Продажи</p>
+                                    <p> {{form.Production}} Производство, Технологии</p>
+                                    <p> {{form.Working}} Рабочий персонал</p>
+
+                                    <p> {{form.Insurance}} Страхование</p>
+                                    <p> {{form.Building}} Строительство, Архитектура</p>
+                                    <p> {{form.Transport}} Транспорт, Логистика</p>
+
+                                    <p> {{form.Tourism}} Туризм, Гостиницы, Рестораны</p>
+                                    <p> {{form.Control}} Управление персоналом</p>
+                                    <p> {{form.Finance}} Финансы, Банки, Инвестиции</p>
+
+                                    <p> {{form.Lawyers}} Юристы</p>
+                                
+
+
+
+
+
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div id="myopt">
+                                <div class="form-group row" style="margin-top: 40px;">
+                                  <label for="inputEmail3" class="col-sm-3 col-form-label">
+                                    <h4 style="font-weight: bold;">Опыт работы</h4></label>
+                                </div>
+                                <div class="form-group row" style="margin-top: 30px;">
+                                  <label for="inputPassword3" class="col-sm-2 col-form-label">Начало работы</label>
+                                  <div class="col-sm-6">
+                                    {{form.opnachala}}
+                                  </div>
+                                </div>
+                                <div class="form-group row" style="margin-top: 30px;">
+                                  <label for="inputPassword3" class="col-sm-2 col-form-label">По настоящее время</label>
+                                  <div class="col-sm-6">
+                                    {{form.opndo}}
+                                  </div>
+                                </div>
+                                <div class="form-group row" style="margin-top: 30px;">
+                                  <label for="inputPassword3" class="col-sm-2 col-form-label">Организация</label>
+                                  <div class="col-sm-6">
+                                    {{form.organizatsiya}}
+                                  </div>
+                                </div>
+                                <div class="form-group row" style="margin-top: 30px;">
+                                  <label for="inputPassword3" class="col-sm-2 col-form-label">Должность</label>
+                                  <div class="col-sm-6">
+                                    {{form.doljinos}}
+                                  </div>
+                                </div>
+                                <div class="form-group row" style="margin-top: 30px;">
+                                  <label for="inputPassword3" class="col-sm-2 col-form-label">Обязанности на рабочем месте</label>
+                                  <div class="col-sm-6">
+                                    {{form.shto_vi_del_na}}
+                                  </div>
+                                </div>
+                                <div class="form-group row" style="margin-top: 30px;">
+                                  <label for="inputPassword3" class="col-sm-2 col-form-label">О себе</label>
+                                  <div class="col-sm-6">
+                                    {{form.raskajiti_o_sebya}}
+                                  </div>
+                                </div>
+                                <div class="form-group row" style="margin-top: 30px;">
+                                  <label for="inputPassword3" class="col-sm-2 col-form-label">ключевые навыки</label>
+                                  <div class="col-sm-6">
+                                    {{form.kluchniy_naviki}}
+                                  </div>
+                                </div>
+                              </div>
+
+                            
+
+
+
+
+
+
+
+                              <!-- ****** -->
+                            </div>
+                          </div>
+                          <!-- //// OPT bor formasi -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <script type="text/javascript">
+                  var modall = document.getElementById("myopt");
+                  var optbor = document.getElementById("optbor");
+                  optbor.onclick = function() {
+                    modall.style.display = "block";
+                  }
+                  var modall = document.getElementById("myopt");
+                  var optyuqq = document.getElementById("optyuqq");
+                  optyuqq.onclick = function() {
+                    modall.style.display = "none";
+                  }
+                </script>
+
+                <div class="form-group row">
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Сохранить и опубликовать</button>
+                  </div>
+                </div>
+              </form>
+              <!-- ****************** -->
+            </div>
+
+          </div>
+          <!-- **** -->
+
+        </div>
+      </div>
+
+    </div>
+    <!-- ****************** -->
+
+    <!-- ********************* footer ********************************-->
+    <footer>
+      <style type="text/css">
+        .col {
+          color: #CCCCCC;
+        }
+      </style>
+      <div class="container-fluid">
+
+        <div class="row" style="background: #212122; height: auto;">
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col">
+              <img style="width: 100px;" src="{% static 'assets/img/Логотип_СКФУ.png' %}">
+            </p>
+            <p class="col">Мы помогаем студентам "СКФУ" найти работу</p>
+            <p class="col">Все наши усилия направлены на то, чтобы студенты находили свой путь быстрее</p>
+
+          </div>
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col" style="color: white; font-weight: bold;">Контакты</p>
+            <p class="col">Реклама на сайте</p>
+            <p class="col">Требования к ПО</p>
+            <p class="col">Защита персональных данных</p>
+
+          </div>
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col" style="color: white; font-weight: bold;">Контакты</p>
+            <p class="col">Готовое резюме</p>
+            <p class="col">Продвижение резюме</p>
+            <p class="col">Профориентация</p>
+
+          </div>
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col" style="color: white; font-weight: bold;">Контакты</p>
+            <p class="col">Поиск сотрудников</p>
+            <p class="col">Помощь</p>
+
+            <p class="col">Switch to English</p>
+
+          </div>
+
+        </div>
+      </div>
+      <style type="text/css">
+        .sil li {
+          display: inline-block;
+          color: white;
+          margin-left: 10px;
+        }
+        
+        .sill li {
+          display: inline-block;
+          color: white;
+          margin-top: -15px;
+          margin-left: 10px;
+        }
+      </style>
+      <div class="container-fluid" style="background: #212122;">
+        <div class="row">
+          <div class="col-md-3">
+            <ul class="sil">
+              <li style="margin-left: 38px;">
+                <a href="#">
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                                            <i class="fab fa-vk" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 7px;"></i>
+                                            </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style=" border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px; ">
+                                            <i class="fab fa-facebook-f" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 6px;"></i>
+                                            </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                                            <i class="fab fa-odnoklassniki" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 6px;"></i>
+                                            </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                                            <i class="fab fa-twitter" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 7px;"></i>
+                                            </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                                            <i class="fab fa-instagram" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 7px;"></i>
+                                            </h4>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+          <div class="col-sm">
+            <ul class="sill">
+              <li style="margin-left: 39px;">
+                <a href="#">
+                  <h4>
+                                            <img style="width: 130px; margin-top: 5px;" src="{% static 'assets/img/Download-on-the-App-Store-button.png' %}">
+                                            </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4>
+                                            <img style="width: 168px; margin-top: 5px;" src="{% static 'assets/img/google-play-badge-ru.png' %}">
+                                            </h4>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- ********************************************************/footer -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      /* The Modal (background) */
+      
+      .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+      }
+      /* Modal Content */
+      
+      .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        height: auto;
+      }
+      /* The Close Button */
+      
+      .close {
+        color: #000;
+        font-size: 50px;
+        font-weight: bold;
+        margin-top: -90px;
+        margin-right: 230px;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+    <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+      // When the user clicks the button, open the modal
+      btn.onclick = function() {
+          modal.style.display = "block";
+        }
+        // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+          modal.style.display = "none";
+        }
+        // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    </script>
+
+    <script type="text/javascript" src="{% static 'assets/js/formset.js' %}"></script>
+
+</body>
+
+</html>

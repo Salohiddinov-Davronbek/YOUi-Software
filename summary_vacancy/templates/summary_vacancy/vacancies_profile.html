@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Home page </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <script src="https://kit.fontawesome.com/47105634f8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/js/bootstrap.min.js' %}">
+
+    <link href="{% static 'assets/css/theme/collapse/theme_style.css' %}" rel="stylesheet" id="rt_style_components"
+      type="text/css" />
+      
+  </head>
+  <body style="background: rgba(0,0,0,0.9);">
+    <div class="container-fluid">
+      <div class="row" style="width: 98%; margin: auto; height: 150px; padding-left: 0px; padding-right: 0px;">
+        <div class="col-sm" style=" padding: 10px;">
+          <nav class="navbar navbar-expand-lg navbar-light " style="margin-top: 30px;">
+            
+            <a class="navbar-brand" href="{% url 'summary_vacancy:s_profile' %}">
+              <img src="{% static 'bootstrap/images/logo_white.jpg' %}" style="border-radius: 50%; width: 50px;">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  {% if request.user.is_authenticated %}
+                    {% for p in b %}
+                      <a class="nav-link" href="{% url 'summary_vacancy:vacancies_biografies' %}" style="color: white;">Мои вакансии <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#" style="color: white;">Помощь <span class="sr-only">(current)</span></a>
+                    </li>
+                  </ul>
+                  <a href="#">
+                    <h4 style="margin-right: 30px;">
+                    <i class="far fa-star" style="font-size: 20px; color: white; font-size: 30px;"></i>
+                    </h4>
+                  </a>
+                  <a href="#">
+                    <h4 style="margin-right: 30px;">
+                    <i class="far fa-bell" style="font-size: 20px; color: white; font-size: 30px;"></i>
+                    </h4>
+                  </a>
+
+                  <!-- ****** -->                  
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                          data-close-others="true">                   
+                      <i class="far fa-user-circle" style="font-size: 20px; color: white; font-size: 30px;"></i>                     
+                        </a>
+                        
+                        <ul class="dropdown-menu  dropdown-menu-default">
+                          <li>
+                            <a href="{% url 'summary_vacancy:user_profile' %}">
+                            <i class="fas fa-user-circle"></i><font style="font-weight: bold; font-size: 17px;"> Компания: {{p.name_company}} </font>
+
+                               ({{p.user.last_name}} {{p.user.first_name}}) </a>
+                          </li>
+                          <li>
+                            <a href="{% url 'summary_vacancy:v_details' %}">
+                              <i class="fas fa-cog"></i> Настройка
+                            </a>
+                          </li>
+                          
+                          <li class="divider"> </li>
+                          <li>
+                            <a href="{% url 'logout' %}">
+                            <i class="fas fa-sign-out-alt"></i> Выход </a>
+                          </li>
+                        </ul> 
+                 
+                {% endfor %}
+              {% endif %}
+            </nav>
+          </div>
+        </div>
+      </div>
+ <!-- ***************** -->
+   <!-- /11111111111111111111111111 -->
+    <div class="container-fluid" style="background: white; background: rgb(245, 241, 240); height: 120px;">
+      <div class="menu1" style="width: 85%; margin: auto;">
+        
+        <!-- ****************** -->
+        <div class="input-group mb-3" style="width: 90%; padding-top: 20px;">
+          <input type="text" class="form-control col-md-7" placeholder="Профессия, должность или компания" aria-label="Recipient's username" aria-describedby="button-addon2" style="height: 50px;">
+          <div class="input-group-append">
+            <a href="search.html">
+              <button class="btn btn btn-primary" type="button" id="button-addon2" style="height: 50px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; width: 100px;">Найти</button>
+            </a>
+          </div>
+        </div>
+        <!-- /////************** -->
+      </div>
+      <div class="menu1" style="width: 85%; margin: auto;">
+        <div style="padding-left: 0px;">
+          <ul id="menu" style="padding-left: 0px;">
+            <li>Вакансии</li>
+            <li style="margin-left: 20px;">Резюме</li>
+          </ul>
+        </div>
+      </div>
+
+      <style type="text/css">
+      #menu li{
+      display: inline;
+      font-family: Arial,sans-serif;
+      }
+      </style>
+    </div>
+    <!-- /11111111111111111111111111 -->
+    <div class="container-fluid" style="background: white; height: auto;">
+      <div class="row" style="height: 600px;">
+        <div class="col-sm">
+          <!-- **** -->
+          <!-- ///// -->
+        </div>
+      </div>
+      
+    </div>
+    <!-- ****************** -->
+      
+
+
+   <!-- ********************* footer ********************************-->
+    <footer>
+      <style type="text/css">
+      .col{
+      color: #CCCCCC;
+      }
+      </style>
+      <div class="container-fluid">
+        
+        <div class="row" style="background: #212122; height: auto;">
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col">
+              <img style="width: 100px;" src="{% static 'assets/img/Логотип_СКФУ.png' %}">
+            </p>
+            <p class="col">Мы помогаем студентам "СКФУ" найти работу</p>
+            <p class="col">Все наши усилия направлены на то, чтобы студенты находили свой путь быстрее</p>
+            
+            
+          </div>
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col" style="color: white; font-weight: bold;">Контакты</p>
+            <p class="col">Реклама на сайте</p>
+            <p class="col">Требования к ПО</p>
+            <p class="col">Защита персональных данных</p>
+            
+          </div>
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col" style="color: white; font-weight: bold;">Контакты</p>
+            <p class="col">Готовое резюме</p>
+            <p class="col">Продвижение резюме</p>
+            <p class="col">Профориентация</p>
+            
+            
+          </div>
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col" style="color: white; font-weight: bold;">Контакты</p>
+            <p class="col">Поиск сотрудников</p>
+            <p class="col">Помощь</p>
+            
+            <p class="col">Switch to English</p>
+            
+            
+          </div>
+          
+          
+        </div>
+      </div>
+      <style type="text/css">
+      .sil li{
+      display: inline-block;
+      color: white;
+      margin-left: 10px;
+      }
+      .sill li{
+      display: inline-block;
+      color: white;
+      margin-top: -15px;
+      margin-left: 10px;
+      }
+      </style>
+      <div class="container-fluid" style="background: #212122;">
+        <div class="row">
+          <div class="col-md-3">
+            <ul class="sil">
+              <li style="margin-left: 38px;">
+                <a href="#" >
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                  <i class="fab fa-vk" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 7px;"></i>
+                  </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style=" border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px; ">
+                  <i class="fab fa-facebook-f" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 6px;"></i>
+                  </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                  <i class="fab fa-odnoklassniki" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 6px;"></i>
+                  </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                  <i class="fab fa-twitter" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 7px;"></i>
+                  </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                  <i class="fab fa-instagram" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 7px;"></i>
+                  </h4>
+                </a>
+              </li>
+            </ul>        
+            
+            
+          </div>
+          <div class="col-sm">
+            <ul class="sill">
+              <li style="margin-left: 39px;">
+                <a href="#">
+                  <h4>
+                  <img style="width: 130px; margin-top: 5px;" src="{% static 'assets/img/Download-on-the-App-Store-button.png' %}">
+                  </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4>
+                  <img style="width: 168px; margin-top: 5px;" src="{% static 'assets/img/google-play-badge-ru.png' %}">
+                  </h4>
+                </a>
+              </li>
+            </ul>
+            
+            
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- ********************************************************/footer -->
+
+
+
+<script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

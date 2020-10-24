@@ -1,0 +1,10 @@
+﻿pip install django=2.2.3
+pip install Pillow
+pip install crispy-forms-gds
+pip install django-bootstrap-form
+pip install django_summernote
+pip install django-multiselectfield
+django-ckeditor==4.4.7
+pip install django-ckeditor
+pip install --user django-import_export
+pip install django-model-utils

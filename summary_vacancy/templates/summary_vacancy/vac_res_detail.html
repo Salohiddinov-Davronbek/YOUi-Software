@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Home page </title>
+    {% load static %}
+    <script src="https://kit.fontawesome.com/47105634f8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/js/bootstrap.min.js' %}">
+
+
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+  </head>
+  <body style="background: url({% static 'bootstrap/images/home-1-slider-image-3.jpg' %});">
+    <!-- 1111111111111111111111111 -->
+    <div class="container-fluid">
+      <div class="container">
+        <div class="row" style="height: 150px; padding-left: 0px; padding-right: 0px;">
+          <div class="col-sm" style=" padding: 10px;">
+            <nav class="navbar navbar-expand-lg navbar-light " style="margin-top: 30px;">
+              <a class="navbar-brand" href="{% url 'summary_vacancy:home' %}">
+                <img src="{% static 'bootstrap/images/logo_white.jpg' %}" style="border-radius: 50%; width: 50px;">
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#" style="color: white;">Помощь <span class="sr-only">(current)</span></a>
+                  </li>
+                  
+                  
+                </ul>
+                <a href="{% url 'summary_vacancy:summary_create' %}">
+                  <button class="btn btn btn btn-outline-success  my-2 my-sm-0" type="submit" style="background: transparent;  border-radius: 15px;">Создать резюме</button>
+                </a>
+                <a href="{% url 'summary_vacancy:vacancies_create' %}">
+                  <button class="btn btn btn btn-outline-light  my-2 my-sm-0" type="submit" style="background: transparent;  border-radius: 15px; margin-left: 10px;">Создать вакансию</button>
+                </a>
+              </div>
+            </nav>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- /11111111111111111111111111 -->
+    <div class="container-fluid" style="background: white; background: rgb(245, 241, 240); height: 120px;">
+      <div class="menu1" style="width: 85%; margin: auto;">
+        
+        <!-- ****************** -->
+        <div class="input-group mb-3" style="width: 90%; padding-top: 20px;">
+          
+          <input type="text" id="search"  class="form-control col-md-7" placeholder="Профессия, должность или компания" aria-label="Recipient's username" aria-describedby="button-addon2" style="height: 50px;">
+
+          <div class="input-group-append">
+            <a href="search.html">
+              <button class="btn btn btn-primary" type="button" id="button-addon2" style="height: 50px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; width: 100px;">Найти</button>
+            </a>
+
+          </div>
+        </div>
+      
+        <!-- /////************** -->
+      </div>
+
+      <div class="menu1" style="width: 85%; margin: auto;">
+        <div style="padding-left: 0px;">
+           <ul id="menu" style="padding-left: 0px;">
+          <a href="{% url 'summary_vacancy:vac_search' %}"><li><u> Вакансии</u></li></a>
+        <a href="{% url 'summary_vacancy:res_search' %}"><li style="margin-left: 20px; color: black;">Резюме</li></a>
+          </ul>
+
+        </div>
+      </div>
+
+
+      <style type="text/css">
+      #menu li{
+      display: inline;
+      font-family: Arial,sans-serif;
+      }
+      </style>
+    </div>
+    <!-- /11111111111111111111111111 -->
+    <div class="container-fluid" style="background: white; height: auto;">
+      <div class="row" style="height: auto;">
+        <div class="col-sm">
+          <!-- **** -->
+            <div class="row">
+            <div class="col-sm">
+              <div>
+
+                <p id="demo" style="width: 85%; margin: auto; margin-top: 40px; margin-bottom: 20px; font-size: 20px;"></p> 
+
+              </div>           
+
+            </div>
+          </div>
+
+    
+
+
+      
+         
+           <div class="row">
+          
+            <div style="border: 1px solid rgb(191, 190, 186);  width: 60%; margin-left: 125px; padding: 10px; margin-bottom: 10px; border-radius: 2px;">
+            <p style="font-size: 17px; color: rgb(66, 135, 245);">     
+             <a href="{{ s.get_absolute_url }}">Вакансия - {{userr.name_vac}}</a> 
+       
+            <img src="" style="width: 60px; height: 70px; float: right; border-radius: 10px; ">           
+            </p>
+
+            <p style="font-size: 14px; color: black;">     
+              <font style="font-weight: bold;">Опыт работы </font> {{userr.optrabota}}               
+            </p>
+
+             <p style="font-size: 14px; color: black; width: 50%; ">     
+              <font style="font-weight: bold;">Описания</font> {{userr.opisaniya}}               
+            </p>
+
+
+            <p style="font-size: 14px; color: black;">  
+            <font style="font-weight: bold;">График работы </font>    
+            {{userr.grafik_rab}}
+            </p>
+
+            <p style="font-size: 14px; color: black;">
+           <font style="font-weight: bold;">Режим работы</font>    
+            <script type="text/javascript">
+              var a = ('{{userr.rejimraboti1}}');
+              var b = ('{{userr.rejimraboti2}}');
+              var c = ('{{userr..rejimraboti3}}');
+              console.log(typeof 'a');
+              if (a == "True") {
+                document.write('Работа только по сб и вс');
+              }else if (b == "True") {
+                document.write('Можно работать сменами по 4–6 часов в день');
+              }else if (c == "True") {
+                document.write('Можно начинать работать после 16:00');
+              }
+            </script>     
+           
+            </p>
+
+            <p style="font-size: 15px;"> 
+            <font style="font-weight: bold;">Ключевые навыки</font>    
+            {{userr.kluchniy_naviki}}           
+            </p>
+
+            
+
+
+            <p style="font-size: 15px;"> 
+            <font style="font-weight: bold;">Предполагаемый уровень дохода в месяц или за объем работ    </font>
+            от {{userr.doxodot}}  до {{userr.doxoddo}} {{userr.salaryy}} {{userr.nalog}}                 
+            </p> 
+
+
+            
+
+
+
+            <p style="font-size: 15px;"> 
+            <font style="font-weight: bold;">Тип занятости</font>              
+            <script type="text/javascript">
+              var a = ('{{userr.vozmojno}}');
+
+              if (a = "True") {
+                document.write('Возможно временное оформление')
+              }
+
+            </script> 
+             {{userr.tipza}}             
+            </p> 
+
+
+
+
+
+            <p style="font-size: 15px;"> 
+            <font style="font-weight: bold;">Режим работы</font>              
+            <script type="text/javascript">
+              var a = ('{{userr.rejimraboti1}}');
+              var b = ('{{userr.rejimraboti2}}');
+              var c = ('{{userr.rejimraboti3}}');
+
+              if (a = "True") {
+                document.write('Работа только по сб и вс')
+              }else if (b = "True") {
+                document.write('Можно работать сменами по 4–6 часов в день')
+              }else if (c == "True") {
+                document.write('Можно начинать работать после 16:00')
+              }
+
+            </script> 
+             {{userr.tipza}}             
+            </p>
+
+
+
+            <p style="font-size: 15px;"> 
+            <font style="font-weight: bold;">Адрес вакансии </font>
+            {{userr.grafik_rab}}                 
+            </p>  
+
+
+            <p style="font-size: 15px;"> 
+            <font style="font-weight: bold;">Адрес вакансии </font>
+            {{userr.maestarabota}}                 
+            </p>  
+
+                
+
+            <p style="font-size: 15px;">
+             <font style="font-weight: bold;">Вакансия опубликована </font>  
+            {{userr.pub_date}}           
+            </p>
+
+            </div>
+
+          </div>
+
+      
+
+
+
+
+
+
+          <!-- ///// -->
+        </div>
+      </div>
+      
+    </div>
+    <!-- ****************** -->
+    
+    <!-- ********************* footer ********************************-->
+    <footer>
+      <style type="text/css">
+      .col{
+      color: #CCCCCC;
+      }
+      </style>
+      <div class="container-fluid">
+        
+        <div class="row" style="background: #212122; height: auto;">
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col">
+              <img style="width: 100px;" src="{% static 'assets/img/Логотип_СКФУ.png' %}">
+            </p>
+            <p class="col">Мы помогаем студентам "СКФУ" найти работу</p>
+            <p class="col">Все наши усилия направлены на то, чтобы студенты находили свой путь быстрее</p>
+            
+            
+          </div>
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col" style="color: white; font-weight: bold;">Контакты</p>
+            <p class="col">Реклама на сайте</p>
+            <p class="col">Требования к ПО</p>
+            <p class="col">Защита персональных данных</p>
+            
+          </div>
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col" style="color: white; font-weight: bold;">Контакты</p>
+            <p class="col">Готовое резюме</p>
+            <p class="col">Продвижение резюме</p>
+            <p class="col">Профориентация</p>
+            
+            
+          </div>
+          <div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+            <p class="col" style="color: white; font-weight: bold;">Контакты</p>
+            <p class="col">Поиск сотрудников</p>
+            <p class="col">Помощь</p>
+            
+            <p class="col">Switch to English</p>
+            
+            
+          </div>
+          
+          
+        </div>
+      </div>
+      <style type="text/css">
+      .sil li{
+      display: inline-block;
+      color: white;
+      margin-left: 10px;
+      }
+      .sill li{
+      display: inline-block;
+      color: white;
+      margin-top: -15px;
+      margin-left: 10px;
+      }
+      </style>
+      <div class="container-fluid" style="background: #212122;">
+        <div class="row">
+          <div class="col-md-3">
+            <ul class="sil">
+              <li style="margin-left: 38px;">
+                <a href="#" >
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                  <i class="fab fa-vk" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 10px; margin-left: 7px;"></i>
+                  </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style=" border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px; ">
+                  <i class="fab fa-facebook-f" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 10px; margin-left: 12px;"></i>
+                  </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                  <i class="fab fa-odnoklassniki" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 10px; margin-left: 13px;"></i>
+                  </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                  <i class="fab fa-twitter" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 10px; margin-left: 10px;"></i>
+                  </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+                  <i class="fab fa-instagram" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 10px; margin-left: 11px;"></i>
+                  </h4>
+                </a>
+              </li>
+            </ul>
+            
+            
+          </div>
+          <div class="col-sm">
+            <ul class="sill">
+              <li style="margin-left: 39px;">
+                <a href="#">
+                  <h4>
+                  <img style="width: 130px; margin-top: 5px;" src="{% static 'assets/img/Download-on-the-App-Store-button.png' %}">
+                  </h4>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h4>
+                  <img style="width: 168px; margin-top: 5px;" src="{% static 'assets/img/google-play-badge-ru.png' %}">
+                  </h4>
+                </a>
+              </li>
+            </ul>
+            
+            
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- ********************************************************/footer -->
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+<!-- 
+<script src="{% static 'bootstrap/js/main.js' %}"></script> -->
+  </body>
+</html>

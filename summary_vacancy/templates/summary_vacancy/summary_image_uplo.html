@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Home page </title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		{% load bootstrap %}
+		{% load static %}
+		<script src="https://kit.fontawesome.com/47105634f8.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/js/bootstrap.min.js' %}">
+		<link href="{% static 'assets/css/theme/collapse/theme_style.css' %}" rel="stylesheet" id="rt_style_components"
+			type="text/css" />
+			
+		</head>
+		<body style="background: rgba(0,0,0,0.9);">
+			<div class="container-fluid">
+				<div class="row" style="width: 98%; margin: auto; height: 150px; padding-left: 0px; padding-right: 0px;">
+					<div class="col-sm" style=" padding: 10px;">
+						<nav class="navbar navbar-expand-lg navbar-light " style="margin-top: 30px;">
+							
+							<a class="navbar-brand" href="{% url 'summary_vacancy:s_profile' %}">
+								<img src="{% static 'bootstrap/images/logo_white.jpg' %}" style="border-radius: 50%; width: 50px;">
+							</a>
+							
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse" id="navbarSupportedContent">
+								<ul class="navbar-nav mr-auto">
+									<li class="nav-item active">
+										{% if request.user.is_authenticated %}
+											{% for summaries in a %}
+												<a class="nav-link" href="{% url 'summary_vacancy:meine_biografiess' %}" style="color: white;">Мои резюме <span class="sr-only">(current)</span></a>
+											</li>
+											<li class="nav-item active">
+												<a class="nav-link" href="#" style="color: white;">Помощь <span class="sr-only">(current)</span></a>
+											</li>
+										</ul>
+										<a href="#">
+											<h4 style="margin-right: 30px;">
+											<i class="far fa-star" style="font-size: 20px; color: white; font-size: 30px;"></i>
+											</h4>
+										</a>
+										<a href="#">
+											<h4 style="margin-right: 30px;">
+											<i class="far fa-bell" style="font-size: 20px; color: white; font-size: 30px;"></i>
+											</h4>
+										</a>
+										<!-- ****** -->
+										<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+											data-close-others="true">
+											<i class="far fa-user-circle" style="font-size: 20px; color: white; font-size: 30px;"></i>
+										</a>
+										
+										<ul class="dropdown-menu  dropdown-menu-default">
+											<li>
+												<a href="{% url 'summary_vacancy:user_profile' %}">
+												<i class="fas fa-user-circle"></i> {{summaries.user.last_name}} {{summaries.user.first_name}} </a>
+											</li>
+											<li>
+												<a href="{% url 'summary_vacancy:s_details' %}">
+													<i class="fas fa-cog"></i> Настройка
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<i class="fas fa-image"></i></i> изображения
+												</a>
+											</li>
+											<li class="divider"> </li>
+											<li>
+												<a href="{% url 'logout' %}">
+												<i class="fas fa-sign-out-alt"></i> Выход </a>
+											</li>
+										</ul>
+										
+									{% endfor %}
+								{% endif %}
+							</nav>
+						</div>
+					</div>
+				</div>
+				<!-- ***************** -->
+	
+				<!-- /11111111111111111111111111 -->
+				<div class="container-fluid" style="background: white; height: auto;">
+					<div class="container">
+						<div class="row" style="height: 600px;>
+							<div class="col-sm">
+								
+								<!-- /******************1111111111111 -->
+								{% for p in a %}
+									<div class="container-fluid" style="margin-top: 40px;">
+										<h2>Настройки</h2>
+										<ul class="nav nav-tabs" style="margin-top: 30px;">
+											<li class="nav-item">
+												<a class="nav-link" href="{% url 'summary_vacancy:user_profile' %}">Личные данные</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link active"  href="{% url 'summary_vacancy:book_editt' user.id %}">Изображения</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="{% url 'summary_vacancy:s_details' %}">Настройка</a>
+											</li>
+										</ul>
+										<!-- *** -->
+										<div style="margin-top: 50px;">
+											
+											<div class="form-group">
+												<label for="exampleInputEmail1">Загрузить фотографии для резюме профиль</label><br>
+												<button type="button" class="btn btn-primary" id="myBtn">Загрузить фотографию</button>
+												
+												
+												<div id="myModal" class="modal">
+													<span class="close">&times;</span>
+													<!-- Modal content -->
+													<div class="modal-content">			
+														<p>Добавить фото для резюме</p>
+														<p>Загрузите изображения</p>
+
+									<form method="POST" enctype="multipart/form-data" style="border: 5px dotted rgb(92, 94, 92); height: 300px; padding: 10px;">{% csrf_token %}
+										Чтобы удалить изображение, выберите его и нажмите кнопку удаления.
+										{{ profile_form.summary_image_u|bootstrap }}
+										
+										<button type="submit" class="btn btn-primary">
+										Загрузить</button>
+										<button type="submit" class="btn btn-danger">удалить фотографию</button>
+									</form>
+
+													</div>
+												</div>
+												
+											</div>
+											<div class="form-group">
+												<label for="exampleInputEmail1">Загрузить фотографии для автоматической генерации резюме файл</label><br>
+												<button type="button" class="btn btn-primary">Загрузить фотографию</button>
+												
+												
+											</div>
+						
+											
+										</div>
+									{% endfor %}
+									
+									
+								</div>
+								<!-- *****222222222222222222 -->
+
+
+								
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<!-- ****************** -->
+				
+				<!-- ********************* footer ********************************-->
+				<footer>
+					<style type="text/css">
+					.col{
+					color: #CCCCCC;
+					}
+					</style>
+					<div class="container-fluid">
+						
+						<div class="row" style="background: #212122; height: auto;">
+							<div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+								<p class="col">
+									<img style="width: 100px;" src="{% static 'assets/img/Логотип_СКФУ.png' %}">
+								</p>
+								<p class="col">Мы помогаем студентам "СКФУ" найти работу</p>
+								<p class="col">Все наши усилия направлены на то, чтобы студенты находили свой путь быстрее</p>
+								
+								
+							</div>
+							<div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+								<p class="col" style="color: white; font-weight: bold;">Контакты</p>
+								<p class="col">Реклама на сайте</p>
+								<p class="col">Требования к ПО</p>
+								<p class="col">Защита персональных данных</p>
+								
+							</div>
+							<div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+								<p class="col" style="color: white; font-weight: bold;">Контакты</p>
+								<p class="col">Готовое резюме</p>
+								<p class="col">Продвижение резюме</p>
+								<p class="col">Профориентация</p>
+								
+								
+							</div>
+							<div class="col-sm" style="padding: 20px; margin-left: 60px; color: white;">
+								<p class="col" style="color: white; font-weight: bold;">Контакты</p>
+								<p class="col">Поиск сотрудников</p>
+								<p class="col">Помощь</p>
+								
+								<p class="col">Switch to English</p>
+								
+								
+							</div>
+							
+							
+						</div>
+					</div>
+					<style type="text/css">
+					.sil li{
+					display: inline-block;
+					color: white;
+					margin-left: 10px;
+					}
+					.sill li{
+					display: inline-block;
+					color: white;
+					margin-top: -15px;
+					margin-left: 10px;
+					}
+					</style>
+					<div class="container-fluid" style="background: #212122;">
+						<div class="row">
+							<div class="col-md-3">
+								<ul class="sil">
+									<li style="margin-left: 38px;">
+										<a href="#" >
+											<h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+											<i class="fab fa-vk" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 7px;"></i>
+											</h4>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h4 style=" border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px; ">
+											<i class="fab fa-facebook-f" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 6px;"></i>
+											</h4>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+											<i class="fab fa-odnoklassniki" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 6px;"></i>
+											</h4>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+											<i class="fab fa-twitter" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 7px;"></i>
+											</h4>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h4 style="border: 1px solid rgb(197, 201, 198); border-radius: 50px; width: 40px; height: 40px;">
+											<i class="fab fa-instagram" style="font-size: 20px; color: rgb(197, 201, 198); margin-top: 11px; margin-left: 7px;"></i>
+											</h4>
+										</a>
+									</li>
+								</ul>
+								
+								
+							</div>
+							<div class="col-sm">
+								<ul class="sill">
+									<li style="margin-left: 39px;">
+										<a href="#">
+											<h4>
+											<img style="width: 130px; margin-top: 5px;" src="{% static 'assets/img/Download-on-the-App-Store-button.png' %}">
+											</h4>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h4>
+											<img style="width: 168px; margin-top: 5px;" src="{% static 'assets/img/google-play-badge-ru.png' %}">
+											</h4>
+										</a>
+									</li>
+								</ul>
+								
+								
+							</div>
+						</div>
+					</div>
+				</footer>
+				<!-- ********************************************************/footer -->
+				<script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+				<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+				<style>
+				body {font-family: Arial, Helvetica, sans-serif;}
+				/* The Modal (background) */
+				.modal {
+				display: none; /* Hidden by default */
+				position: fixed; /* Stay in place */
+				z-index: 1; /* Sit on top */
+				padding-top: 240px; /* Location of the box */
+				left: 0;
+				top: 0;
+				width: 100%; /* Full width */
+				height: 100%; /* Full height */
+				overflow: auto; /* Enable scroll if needed */
+				background-color: rgb(0,0,0); /* Fallback color */
+				background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+				}
+				/* Modal Content */
+				.modal-content {
+				background-color: #fefefe;
+				margin: auto;
+				padding: 20px;
+				border: 1px solid #888;
+				width: 40%;
+				height: 400px;
+				}
+				/* The Close Button */
+				.close {
+				color: #aaaaaa;				
+				font-size: 50px;
+				font-weight: bold;
+				margin-top: -188px;
+				margin-right: 230px;
+				}
+				.close:hover,
+				.close:focus {
+				color: #000;
+				text-decoration: none;
+				cursor: pointer;
+				}
+				</style>
+				<script>
+				// Get the modal
+				var modal = document.getElementById("myModal");
+				// Get the button that opens the modal
+				var btn = document.getElementById("myBtn");
+				// Get the <span> element that closes the modal
+						var span = document.getElementsByClassName("close")[0];
+						// When the user clicks the button, open the modal
+						btn.onclick = function() {
+						modal.style.display = "block";
+						}
+						// When the user clicks on <span> (x), close the modal
+								span.onclick = function() {
+								modal.style.display = "none";
+								}
+								// When the user clicks anywhere outside of the modal, close it
+								window.onclick = function(event) {
+								if (event.target == modal) {
+								modal.style.display = "none";
+								}
+								}
+						</script>
+					</body>
+				</html>
